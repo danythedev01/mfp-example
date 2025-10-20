@@ -9,13 +9,11 @@ const mount = (el) => {
 
 // define development
 if (process.env.NODE_ENV === 'development') {
-    const rootElementId = '_marketing-dev-root';
-    const devRoot = document.querySelector(`#${rootElementId}`);
-    if(devRoot) {
-        mount(devRoot);
-    }else {
-        throw new Error(`${rootElementId} element not found.`)
-    }
+  const devRoot = document.querySelector('#_marketing-dev-root');
+
+  if (devRoot) {
+    mount(devRoot);
+  }
 }
 
 // define isolation (call mount immediately)
