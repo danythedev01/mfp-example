@@ -23,7 +23,5 @@ const devConfig = {
 
 const mergedConfig = merge(commonConfig, devConfig);
 
-console.log({mergedConfig: JSON.stringify(mergedConfig)})
-
 module.exports = mergedConfig;
 // export { mergedConfig }
