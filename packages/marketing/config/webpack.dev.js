@@ -16,9 +16,12 @@ const devConfig = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './public/index.html'
+            template: './public/index.html',
         })
     ]
 }
 
-module.exports = merge(commonConfig, devConfig);
+const mergedConfig = merge(commonConfig, devConfig);
+
+module.exports = mergedConfig;
+// export { mergedConfig }
