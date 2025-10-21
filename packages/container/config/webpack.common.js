@@ -10,7 +10,8 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-              // jsx, transform code to things like es2025 syntax and so on, and convert them to es5
+              // jsx, transform code to things like es2025 syntax 
+              // and so on, and convert them to es5
               presets: ['@babel/preset-react','@babel/preset-env'],
               // add a little bit of aditional code to enable some features like async/await syntax
               plugins: ['@babel/plugin-transform-runtime'],
