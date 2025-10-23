@@ -19,6 +19,7 @@ const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
   return {
     onParentNavigate({ pathname: nextPathName }) {
       const { pathname } = history.location;
+      console.log(nextPathName);
       if ( pathname !== nextPathName ){
         history.push(nextPathName);
       }
@@ -29,7 +30,7 @@ const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
 
 // define development
 if (process.env.NODE_ENV === 'development') {
-  const devRoot = document.querySelector('#_marketing-dev-root');
+  const devRoot = document.querySelector('#_auth-dev-root');
 
 // define isolation (call mount immediately)
 
