@@ -8,6 +8,7 @@ import {
 import Header from './components/Header';
 
 import Progress from './components/Progress';
+import { useState } from 'react';
 
 const AuthLazy = lazy(() => import('./components/AuthApp'));
 const MarketingLazy = lazy(() => import('./components/MarketingApp'));
@@ -17,14 +18,18 @@ const generateClassName = createGenerateClassName({
 });
 
 export default () => {
+  const [isSignedIn, setIsSignedIn] = useState(false);
   return (
     <BrowserRouter>
       <StylesProvider generateClassName={generateClassName}>
         <div>
-          <Header />
+          <Header onSignOut={()=> setIsSignedIn(false)} isSignedIn={isSignedIn} />
           <Suspense fallback={<Progress />}>
             <Switch>
-              <Route path="/auth" component={AuthLazy} />
+              {/* <Route path="/auth" component={AuthLazy} /> */}
+              <Route path="/auth">
+                <AuthLazy onSignIn={()=> setIsSignedIn(true)} />
+              </Route>
               <Route path="/" component={MarketingLazy} />
             </Switch>
           </Suspense>
