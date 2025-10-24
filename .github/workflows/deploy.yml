@@ -21,6 +21,8 @@ jobs:
   deploy-auth:
     if: ${{ inputs.service == 'auth' }}
     uses: ./.github/workflows/auth.yml
+    secrets:
+      inherit
 
   deploy-container:
     if: ${{ inputs.service == 'container' }}
