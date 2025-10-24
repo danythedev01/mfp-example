@@ -32,7 +32,7 @@ export default function Header({ isSignedIn, onSignOut }) {
             to="/"
             sx={{ textDecoration: 'none' }}
           >
-            App
+            App Test
           </Typography>
           <Button
             color="primary"

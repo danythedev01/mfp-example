@@ -1,6 +1,7 @@
 name: deploy-dashboard
 
 on:
+  workflow_call:
   push:
     branches:
       - main
