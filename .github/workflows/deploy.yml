@@ -12,10 +12,6 @@ on:
         - container
         - dashboard
         - marketing
-      aws-deploy:
-        description: 'Deploy to AWS?'
-        required: false
-        type: boolean
 
 jobs:
   deploy-auth:
