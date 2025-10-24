@@ -1,44 +1,46 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-// createMemoryHistory: React Router DOM internally makes use of history
+import { createRoot } from 'react-dom/client';
 import { createMemoryHistory, createBrowserHistory } from 'history';
+import App from './App';
 
 // Mount function to start up the app
-const mount = (el, { onNavigate, onSignIn, defaultHistory, initialPath }) => {
-  const history = defaultHistory || createMemoryHistory({
-    // to avoid starting at `/`
-    initialEntries: [initialPath]
-  });
+const mount = (el, { onSignIn, onNavigate, defaultHistory, initialPath }) => {
+  const history =
+    defaultHistory ||
+    createMemoryHistory({
+      initialEntries: [initialPath],
+    });
 
-  if ( onNavigate ) {
-    history.listen(onNavigate);
+  if (onNavigate) {
+    history.listen((update) => {
+      onNavigate({ pathname: update.location.pathname });
+    });
   }
 
-  ReactDOM.render(<App onSignIn={onSignIn} history={history} />, el);
+  const root = createRoot(el);
+  root.render(<App onSignIn={onSignIn} history={history} />);
 
   return {
-    onParentNavigate({ pathname: nextPathName }) {
+    onParentNavigate({ pathname: nextPathname }) {
       const { pathname } = history.location;
-      console.log(nextPathName);
-      if ( pathname !== nextPathName ){
-        history.push(nextPathName);
-      }
-    }
-  }
 
+      if (pathname !== nextPathname) {
+        history.push(nextPathname);
+      }
+    },
+  };
 };
 
-// define development
+// If we are in development and in isolation,
+// call mount immediately
 if (process.env.NODE_ENV === 'development') {
   const devRoot = document.querySelector('#_auth-dev-root');
-
-// define isolation (call mount immediately)
 
   if (devRoot) {
     mount(devRoot, { defaultHistory: createBrowserHistory() });
   }
 }
 
-// we're running through container and we should export the mount function
+// We are running through container
+// and we should export the mount function
 export { mount };
