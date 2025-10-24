@@ -27,13 +27,19 @@ jobs:
   deploy-container:
     if: ${{ inputs.service == 'container' }}
     uses: ./.github/workflows/container.yml
+    secrets:
+      inherit
 
   deploy-dashboard:
     if: ${{ inputs.service == 'dashboard' }}
     uses: ./.github/workflows/dashboard.yml
+    secrets:
+      inherit
 
   deploy-marketing:
     if: ${{ inputs.service == 'marketing' }}
     uses: ./.github/workflows/marketing.yml
+    secrets:
+      inherit
 
 
